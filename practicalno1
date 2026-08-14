@@ -1,0 +1,26 @@
+from sympy import symbols, diff, solve
+
+x = symbols('x')
+
+f = x**3 - 6*x**2 + 9*x + 1
+
+f1 = diff(f, x)
+f2 = diff(f1, x)
+
+critical_points = solve(f1, x)
+
+print("Function:", f)
+print("First Derivative:", f1)
+print("Second Derivative:", f2)
+print("\nCritical Points:")
+
+for point in critical_points:
+    second = f2.subs(x, point)
+    value = f.subs(x, point)
+
+    if second > 0:
+        print(f"x = {point}, f(x) = {value} -> Local Minimum")
+    elif second < 0:
+        print(f"x = {point}, f(x) = {value} -> Local Maximum")
+    else:
+        print(f"x = {point}, f(x) = {value} -> Test Inconclusive")
